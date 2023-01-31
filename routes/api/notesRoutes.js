@@ -1,8 +1,7 @@
 //Variables Declarations: 
 const router = require('express').Router();
-let { noteArray } = require('../../db/db.json');
 const { createNewnote } = require('../../lib/notes');
-
+let { noteArray } = require('../../db/db.json');
 
 //the note is at api/notes being a JSON
 router.get('/notes', (req, res) => {
