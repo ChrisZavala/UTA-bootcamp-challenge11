@@ -3,9 +3,9 @@ const fs = require("fs");
 const router = require('express').Router();
 const notes = require('../db/db.json');
 //had to install this: npm i uuid version 9.0.0
-const { v4: uuidv4 } = require('uuid');
+const {v4: uuidv4} = require('uuid');
 
-//Get Notes API: 
+//Get Method Notes API: 
 router.get('/notes', (req, res) => {
   console.log(`${req.method} request received`);
 
@@ -18,7 +18,7 @@ router.get('/notes', (req, res) => {
   });
 });
 
-//Post router api
+//Post Method router api
 router.post('/notes', (req, res) => {
   //our deconstructor from class, but this time with only two variable passed through. 
   const { title, text } = req.body; 
@@ -45,14 +45,13 @@ router.post('/notes', (req, res) => {
       }
     });
     res.status(201).json(response);
-
   } else {
     res.status(500).json('Something has happened trying to add your note!')
   }
 });
 
 //Bonus making the delete of the note with the red trash. 
-router.delete('./notes/:id', (req, res) => {
+router.delete('/notes/:id', (req, res) => {
   console.log(` ${req.method} note received for ${req.params.id}`);
 
   fs.readFile('./db/db.json', 'utf8', (err, data) => {
@@ -63,7 +62,7 @@ router.delete('./notes/:id', (req, res) => {
         newNotesData.splice(index, 1);
 
         fs.writeFile('./db/db.json', JSON.stringify(newNotesData, null, 4),
-        (err) => err ? console.log(err) : console.log('New Note Added!'));
+        (err) => err ? console.log(err) : console.log('Your Note Has been Deleted Successfully!'));
       }
     } 
   })
